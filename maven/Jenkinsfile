@@ -19,8 +19,7 @@ pipeline
     {
       steps
       {
-        git credentialsId: 'gitlab-user',
-        url: 'http://git-server/jenkins/simple-java-maven-app.git'
+        url: 'https://github.com/mkyong/maven-examples.git'
       }
     }
     stage('Build') 
@@ -44,16 +43,6 @@ pipeline
         }
       }
     }
-    stage('Sonar-scanner') 
-    { 
-      steps 
-      {
-        withSonarQubeEnv('SonnarQubeServer') 
-	{
-          sh 'mvn clean package sonar:sonar'
-        }
-       }
-     }
      stage('Deploy') 
      {
        steps 
