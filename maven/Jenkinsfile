@@ -19,7 +19,7 @@ pipeline
     {
       steps
       {
-        url: 'https://github.com/ruben-arenas/simple-java-maven-app.git'
+        git 'https://github.com/ruben-arenas/simple-java-maven-app.git'
       }
     }
     stage('Build') 
