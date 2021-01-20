@@ -20,14 +20,14 @@ pipeline
     {
       steps
       {
-        git branch: "master", url: 'https://github.com/mkyong/maven-examples.git'
+        git branch: "main", url: 'https://github.com/ruben-arenas/maven-web-app.git'
       }
     }
     stage('Build') 
     { 
       steps 
       {
-        sh 'mvn -f java-web-project/pom.xml package' 
+        sh 'mvn package' 
       }
     }
     stage('Test') 
