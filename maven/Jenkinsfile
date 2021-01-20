@@ -58,7 +58,7 @@ pipeline
          echo '=== Pushing Maven Docker Image ==='
          script {
             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-            docker push guevavil/mavenapp:latest
+            sh 'docker push guevavil/mavenapp:latest'
           }
         }
        }
