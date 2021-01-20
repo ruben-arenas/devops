@@ -48,8 +48,7 @@ pipeline
       steps 
       {
         echo '=== Building Maven Docker Image ==='
-        
-        sh 'app=docker build -t shanem/spring-petclinic:latest .'
+        sh 'docker build -t guevavil/mavenapp:latest .'
       }
     }
     stage('Deploy') 
@@ -59,7 +58,7 @@ pipeline
          echo '=== Pushing Maven Docker Image ==='
          script {
             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-            app.push("latest")
+            docker push guevavil/mavenapp:latest
           }
         }
        }
