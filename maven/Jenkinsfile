@@ -48,7 +48,9 @@ pipeline
       steps 
       {
         echo '=== Building Maven Docker Image ==='
-        sh 'docker build -t guevavil/mavenapp:latest .'
+        script {
+          docker.build registry + ":$BUILD_NUMBER"
+        }
       }
     }
     stage('Deploy') 
@@ -57,9 +59,7 @@ pipeline
        {
          echo '=== Pushing Maven Docker Image ==='
          script {
-            docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-            sh 'docker push guevavil/mavenapp:latest'
-          }
+          docker.push registry + ":$BUILD_NUMBER"
         }
        }
      }
