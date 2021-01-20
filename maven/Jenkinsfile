@@ -10,7 +10,7 @@ pipeline
     docker 
     {
        image 'maven:3-alpine' 
-       args '--net=jenkins_net -v /tmp/:/root/.m2' 
+       args '-v /tmp/:/root/.m2' 
     }
   }
   stages 
