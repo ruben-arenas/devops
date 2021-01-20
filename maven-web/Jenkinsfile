@@ -30,20 +30,27 @@ pipeline
         sh 'mvn package' 
       }
     }
-    stage('Test') 
-    { 
+    stage('Build Docker Image') 
+    {
       steps 
       {
-        sh 'mvn test' 
-      }
-      post 
-      {
-        always
-	      {
-          junit 'target/surefire-reports/*.xml' 
+        echo '=== Building Maven Docker Image ==='
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
+    stage('Deploy') 
+    {
+       steps 
+       {
+         script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+       }
+     }
     
    
    }
