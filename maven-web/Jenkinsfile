@@ -27,8 +27,7 @@ pipeline
     { 
       steps 
       {
-        sh 'cd java-web-project'
-        sh 'mvn package' 
+        sh 'mvn -f java-web-project/pom.xml package' 
       }
     }
     stage('Test') 
