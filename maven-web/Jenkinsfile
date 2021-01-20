@@ -27,6 +27,7 @@ pipeline
     { 
       steps 
       {
+        sh 'cd java-web-project'
         sh 'mvn package' 
       }
     }
