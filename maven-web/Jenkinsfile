@@ -27,12 +27,13 @@ pipeline
         registry = "guevavil/mavenapp"
         registryCredential = 'dockerhub'
         dockerImage = ''
+        scriptPath = currentBuild.rawBuild.parent.definition.scriptPath
       }
       steps 
       {
         echo '=== Building Maven Docker Image ==='
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER -f jenkins/Dockerfile"
+          dockerImage = docker.build registry + ":$BUILD_NUMBER -f $scriptPath/Dockerfile"
           docker.withRegistry( '', registryCredential ) 
           {
             dockerImage.push()
