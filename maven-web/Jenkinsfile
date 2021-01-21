@@ -34,8 +34,8 @@ pipeline
       steps 
       {
         echo '=== Building Maven Docker Image ==='
-        def workspace = pwd() 
-        sh "echo ${workspace}"
+        def foo = sh(script: 'pwd', returnStdout: true)
+        sh "echo ${foo}"
         script 
         {
           docker.withRegistry( '', registryCredential ) 
