@@ -33,7 +33,7 @@ pipeline
         echo '=== Building Maven Docker Image ==='
         script {
           def scriptPath = currentBuild.rawBuild.parent.definition.scriptPath
-          dockerImage = docker.build registry + ":$BUILD_NUMBER -f $scriptPath/Dockerfile"
+          dockerImage = docker.build registry + ":$BUILD_NUMBER -f ${scriptPath}/Dockerfile"
           docker.withRegistry( '', registryCredential ) 
           {
             dockerImage.push()
