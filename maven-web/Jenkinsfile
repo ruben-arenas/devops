@@ -30,7 +30,7 @@ pipeline
       }
       steps 
       {
-        def scriptPath = currentBuild.rawBuild.parent.definition.scriptPath
+        sh 'def scriptPath = currentBuild.rawBuild.parent.definition.scriptPath'
         echo scriptPath
         echo '=== Building Maven Docker Image ==='
         sh 'mv maven-web/Dockerfile .'
