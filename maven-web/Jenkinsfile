@@ -32,7 +32,8 @@ pipeline
       {
         echo '=== Building Maven Docker Image ==='
         script {
-          def scriptPath = currentBuild.rawBuild.parent.definition.scriptPath
+          def workspace = pwd()
+          echo ${workspace}
           dockerImage = docker.build registry + ":$BUILD_NUMBER -f maven-web/Dockerfile"
           docker.withRegistry( '', registryCredential ) 
           {
