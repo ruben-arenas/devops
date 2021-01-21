@@ -27,11 +27,9 @@ pipeline
         registry = "guevavil/mavenapp"
         registryCredential = 'dockerhub'
         dockerImage = ''
-        scriptPath = currentBuild.rawBuild.parent.definition.scriptPath
       }
       steps 
       {
-        echo scriptPath
         echo '=== Building Maven Docker Image ==='
         sh 'mv maven-web/Dockerfile .'
         script 
