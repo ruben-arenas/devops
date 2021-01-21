@@ -31,9 +31,9 @@ pipeline
       steps 
       {
         echo '=== Building Maven Docker Image ==='
+        sh 'mv maven-web/Dockerfile .'
         script 
         {
-          mv maven-web/Dockerfile .
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
           docker.withRegistry( '', registryCredential ) 
           {
