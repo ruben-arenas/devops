@@ -26,8 +26,6 @@ pipeline
       {
         registry = "guevavil/mavenapp"
         registryCredential = 'dockerhub'
-        dockerImage = ''
-        JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
         BUILD_NUMBER_BASE = '0'
         VERSION_MAJOR = '0'
         VERSION_MINOR = '1'
@@ -36,12 +34,15 @@ pipeline
       steps 
       {
         echo '=== Building Maven Docker Image ==='
-        script {
-          echo '$JENKINS_PATH'
-          docker.withRegistry('', 'dockerhub') {
-                        def customImage = docker.build("guevavil/mavenapp:$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH")
-                        customImage.push()
-                    }
+        def foo = sh(script: 'pwd', returnStdout: true)
+        println(foo)
+        script 
+        {
+          docker.withRegistry( '', registryCredential ) 
+          {
+            def dockerImage = docker.build registry + ":$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH -f maven-web/Dockerfile"
+            dockerImage.push()
+          }
         }
       }
     }
