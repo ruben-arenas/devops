@@ -38,7 +38,7 @@ pipeline
         echo '=== Building Maven Docker Image ==='
         echo JENKINS_PATH
         script {
-          docker.withRegistry( '', registryCredential ) 
+          docker.withRegistry( 'https://index.docker.io/v1/', registryCredential ) 
           {
             def dockerImage = docker.build registry + ":$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH -f maven-web/Dockerfile"
             dockerImage.push()
